@@ -1,6 +1,7 @@
 package com.example.javastart.entities;
 
 import com.example.javastart.utils.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +20,8 @@ public class UserProfile {
     private String address;
     private String profilePhoto;
     private String phone;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "userProfile")
+    private User user;
 }

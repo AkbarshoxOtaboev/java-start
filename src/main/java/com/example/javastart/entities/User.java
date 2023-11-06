@@ -21,4 +21,8 @@ public class User {
     private String password;
 
     private String fullName;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfile;
 }
