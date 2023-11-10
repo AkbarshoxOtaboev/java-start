@@ -1,17 +1,15 @@
 package com.example.javastart.entities;
 
 import com.example.javastart.utils.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -28,4 +26,10 @@ public class Post extends AuditModel {
     private String body;
     private Integer likes = 0;
     private Integer dislikes = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false )
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 }
