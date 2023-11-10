@@ -23,6 +23,11 @@ public class PostServiceImplement implements PostService {
     }
 
     @Override
+    public Post fetchPostById(Long id) {
+        return postRepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public Page<Post> fetchAllPost(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
