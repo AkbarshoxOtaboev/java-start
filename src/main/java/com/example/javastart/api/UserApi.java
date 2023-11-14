@@ -3,6 +3,8 @@ package com.example.javastart.api;
 import com.example.javastart.entities.User;
 import com.example.javastart.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,8 +31,8 @@ public class UserApi {
     }
 
     @GetMapping("/fetchAllUsers")
-    public ResponseEntity<List<User>> fetchAllUsers(){
-        return ResponseEntity.ok(userService.fetchAllUsers());
+    public ResponseEntity<Page<User>> fetchAllUsers(Pageable pageable){
+        return ResponseEntity.ok(userService.fetchAllUsers(pageable));
     }
 
     @PatchMapping("/update/{username}")
